@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
   root 'top#index'
-  get 'charts' => 'charts#index'
+  get 'top/new' => 'top#new'
 end
