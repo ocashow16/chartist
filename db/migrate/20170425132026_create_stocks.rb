@@ -11,4 +11,3 @@ class CreateStocks < ActiveRecord::Migration
     end
   end
 end
-Rails.application.database_configuration
