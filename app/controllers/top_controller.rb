@@ -1,6 +1,7 @@
 class TopController < ApplicationController
   def index
   	@top = "chartist"
+  	@stocks = Stock.order('id ASC')
   end
 
   def new
