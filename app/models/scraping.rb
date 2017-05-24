@@ -30,6 +30,8 @@ class Scraping
     test.each do |start|
       if start[:id] % 7 == 3
         start_value << start[:data]
+        get_start_value
+
       end
     end
     
@@ -54,18 +56,27 @@ class Scraping
       end
     end
 
-    puts "ここから下は日付をまとめた配列"
-    puts dates
-    puts "ここから下は始値をまとめた配列"
-    puts start_value
-    puts "ここから下は高値をまとめた配列"
-    puts high_value
-    puts "ここから下は安値をまとめた配列"
-    puts low_value
-    puts "ここから下は終値をまとめた配列"
-    puts end_value
+    # puts "ここから下は日付をまとめた配列"
+    # puts dates
+    # puts "ここから下は始値をまとめた配列"
+    # puts start_value
+    # puts "ここから下は高値をまとめた配列"
+    # puts high_value
+    # puts "ここから下は安値をまとめた配列"
+    # puts low_value
+    # puts "ここから下は終値をまとめた配列"
+    # puts end_value
 
-    stock = Stock.new(stock: dates, start_value: start_value, high_value: high_value, low_value: low_value, end_value: end_value)
+    def self.get_start_value
+    id = 1
+    start_value.each do |start|
+    stock = Stock.where(id:id).first_or_initialize
+    stock.date = start
+    id += 1
     stock.save
-  end
+     end
+   end
+
+    # stock = Stock.new(stock: dates, start_value: start_value, high_value: high_value, low_value: low_value, end_value: end_value)
+    # stock.save
 end
