@@ -11,16 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170425132026) do
+ActiveRecord::Schema.define(version: 20170604081814) do
 
   create_table "stocks", force: :cascade do |t|
-    t.string   "stock",       limit: 255
     t.integer  "start_value", limit: 4
     t.integer  "high_value",  limit: 4
     t.integer  "low_value",   limit: 4
     t.integer  "end_value",   limit: 4
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.datetime "dates"
   end
 
 end
