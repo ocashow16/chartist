@@ -14,9 +14,9 @@
 	    n = n + 1
     end
 
-    puts "以下０だよ"
-    puts test[3]
-    puts test.last
+    # puts "以下０だよ"
+    # puts test[3]
+    # puts test.last
     # puts test[7]
     # puts test[14]
 
@@ -26,12 +26,15 @@
       	dates << date[:data]
       end
     end
-    puts dates.length
-    puts dates
+    # puts dates.length
+    # puts dates
+
+    i = 0
+    stock = []
 
     dates.each do |date|
-      stock = Stock.new({dates:date})
-      stock.save
+      stock[i] = Stock.new({dates:date})
+      i = i+1
     end
 
     start_value = []
@@ -40,28 +43,52 @@
         start_value << start[:data]
       end
     end
-    puts start_value.length
-    puts start_value
+    # puts start_value.length
+    # puts start_value
+
+    j = 0
 
     start_value.each do |start|
-        stock = Stock.new({start_value: start})
-        stock.save
+      stock[j][:start_value] = start
+      stock[j].save
+      j = j + 1
     end
+
+    # start_value.each do |start|
+    #     stock = Stock.new({start_value: start})
+    #     stock.save
+    # end
     # get_start_value(start_value)
 
-    # high_value = []
-    # test.each do |high|
-    #   if high[:id] % 7 == 4
-    #     high_value << high[:data]
-    #   end
-    # end
+    high_value = []
+    test.each do |high|
+      if high[:id] % 7 == 4
+        high_value << high[:data]
+      end
+    end
 
-    # low_value = []
-    # test.each do |low|
-    #   if low[:id] % 7 == 5
-    #     low_value << low[:data]
-    #   end
-    # end
+    j = 0
+
+    high_value.each do |high|
+      stock[j][:high_value] = high
+      stock[j].save
+      j = j + 1
+    end
+
+    low_value = []
+    test.each do |low|
+      if low[:id] % 7 == 5
+        low_value << low[:data]
+      end
+    end
+
+    j = 0
+
+    low_value.each do |low|
+      stock[j][:low_value] = low
+      stock[j].save
+      j = j + 1
+    end
 
     end_value = []
     test.each do |finish|
@@ -69,12 +96,15 @@
         end_value << finish[:data]
       end
     end
-    puts end_value.length
-    puts end_value
+    # puts end_value.length
+    # puts end_value
+
+    j = 0
 
     end_value.each do |finish|
-      stock = Stock.new({end_value: finish})
-      stock.save
+      stock[j][:end_value] = finish
+      stock[j].save
+      j = j + 1
     end
     # puts "ここから下は日付をまとめた配列"
     # puts dates
