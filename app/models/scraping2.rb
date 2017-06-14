@@ -1,5 +1,5 @@
   class Scraping
-  def self.stock_score
+  def self.atr_score
     agent = Mechanize.new
     page = agent.get("http://k-db.com/indices/I101")
     elements = page.search('#maintable td')
@@ -10,8 +10,8 @@
       data_hash = {}
       data_hash[:id] = n
       data_hash[:data] = ele.inner_text
-	    test << data_hash
-	    n = n + 1
+      test << data_hash
+      n = n + 1
     end
 
     # puts "以下０だよ"
@@ -23,17 +23,17 @@
     dates = []
     test.each do |date|
       if date[:id] % 7 == 1
-      	dates << date[:data]
+        dates << date[:data]
       end
     end
     # puts dates.length
     # puts dates
 
     i = 0
-    stock = []
+    atr = []
 
     dates.each do |date|
-      stock[i] = Stock.new({dates:date})
+      atr[i] = Atr.new({dates:date})
       i = i+1
     end
 
@@ -49,8 +49,8 @@
     j = 0
 
     start_value.each do |start|
-      stock[j][:start_value] = start
-      stock[j].save
+      atr[j][:start_value] = start
+      atr[j].save
       j = j + 1
     end
 
@@ -70,8 +70,8 @@
     j = 0
 
     high_value.each do |high|
-      stock[j][:high_value] = high
-      stock[j].save
+      atr[j][:high_value] = high
+      atr[j].save
       j = j + 1
     end
 
@@ -85,8 +85,8 @@
     j = 0
 
     low_value.each do |low|
-      stock[j][:low_value] = low
-      stock[j].save
+      atr[j][:low_value] = low
+      atr[j].save
       j = j + 1
     end
 
@@ -102,27 +102,8 @@
     j = 0
 
     end_value.each do |finish|
-      stock[j][:end_value] = finish
-      stock[j][:end_value].reverse!
-      stock[j].save
-      j = j + 1
-    end
-
-
-    high_value_minus__low_value = []
-    test.each do |highlow|
-      if (high[:id] % 7 == 4)-(low[:id] % 7 == 5)
-        high_value_minus__low_value << highlow
-      end
-    end
-    # puts end_value.length
-    # puts end_value
-
-    j = 0
-
-    high_value_minus__low_value.each do |highlow|
-      stock[j][:high_value_minus__low_value] = highlow
-      stock[j].save
+      atr[j][:end_value] = finish
+      atr[j].save
       j = j + 1
     end
     # puts "ここから下は日付をまとめた配列"

@@ -11,16 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170604081814) do
+ActiveRecord::Schema.define(version: 20170611073236) do
+
+  create_table "atrs", force: :cascade do |t|
+    t.integer  "high_value_minus_before_end_value", limit: 4
+    t.integer  "before_end_value_minus_low_value",  limit: 4
+    t.integer  "high_value_minus__low_value",       limit: 4
+    t.integer  "true_range",                        limit: 4
+    t.integer  "average_true_range",                limit: 4
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.datetime "dates"
+  end
 
   create_table "stocks", force: :cascade do |t|
-    t.integer  "start_value", limit: 4
-    t.integer  "high_value",  limit: 4
-    t.integer  "low_value",   limit: 4
-    t.integer  "end_value",   limit: 4
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.integer  "start_value",                       limit: 4
+    t.integer  "high_value",                        limit: 4
+    t.integer  "low_value",                         limit: 4
+    t.integer  "end_value",                         limit: 4
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.datetime "dates"
+    t.integer  "high_value_minus_before_end_value", limit: 4
+    t.integer  "before_end_value_minus_low_value",  limit: 4
+    t.integer  "high_value_minus__low_value",       limit: 4
+    t.integer  "true_range",                        limit: 4
+    t.integer  "average_true_range",                limit: 4
   end
 
 end
