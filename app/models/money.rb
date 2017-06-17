@@ -1,4 +1,4 @@
-class Scraping
+class Money
   def self.stock_score
     agent = Mechanize.new
     page = agent.get("http://k-db.com/indices/I101")
@@ -10,25 +10,17 @@ class Scraping
       data_hash = {}
       data_hash[:id] = n
       data_hash[:data] = ele.inner_text
-	    test << data_hash
-	    n = n + 1
+      test << data_hash
+      n = n + 1
     end
-
-    # puts "以下０だよ"
-    # puts test[3]
-    # puts test.last
-    # puts test[7]
-    # puts test[14]
 
     # 日付スクレイピング
     dates = []
     test.each do |date|
       if date[:id] % 7 == 1
-      	dates << date[:data]
+        dates << date[:data]
       end
     end
-    # puts dates.length
-    # puts dates
 
     # 日付保存
     i = 0
@@ -46,23 +38,15 @@ class Scraping
         start_value << start[:data]
       end
     end
-    # puts start_value.length
-    # puts start_value
 
     # 始値保存
     j = 0
     start_value.reverse!
     start_value.each do |start|
       stock[j][:start_value] = start
-      stock[j].save
+      puts start
       j = j + 1
     end
-
-    # start_value.each do |start|
-    #     stock = Stock.new({start_value: start})
-    #     stock.save
-    # end
-    # get_start_value(start_value)
 
     # 高値スクレイピング
     high_value = []
@@ -77,7 +61,6 @@ class Scraping
     high_value.reverse!
     high_value.each do |high|
       stock[j][:high_value] = high
-      stock[j].save
       j = j + 1
     end
 
@@ -94,7 +77,6 @@ class Scraping
     low_value.reverse!
     low_value.each do |low|
       stock[j][:low_value] = low
-      stock[j].save
       j = j + 1
     end
 
@@ -111,42 +93,13 @@ class Scraping
     end_value.reverse!
     end_value.each do |finish|
       stock[j][:end_value] = finish
-      stock[j].save
       j = j + 1
     end
 
-
-    # j = 0
-    # high_value.zip(low_value).each do|highlow|
-    # high1 = highlow[0].to_i - highlow[1].to_i
-    # stock[j][:high_value_minus__low_value] = high1
-    # stock[j].save
-    # j = j + 1
-    # end
-    Atr.calculate
-    Kagi.calculate
+    j = 0
+    high_value.zip(low_value).each do|highlow|
+      high1 = highlow[0].to_i - highlow[1].to_i
+      stock[j][:high_value_minus__low_value] = high1
+    end
   end
-    # puts end_value.length
-    # puts end_value
-
-    # puts "ここから下は日付をまとめた配列"
-    # puts dates
-    # puts "ここから下は始値をまとめた配列"
-    # puts start_value
-    # puts "ここから下は高値をまとめた配列"
-    # puts high_value
-    # puts "ここから下は安値をまとめた配列"
-    # puts low_value
-    # puts "ここから下は終値をまとめた配列"
-    # puts end_value
 end
-
-  # def self.get_start_value(start_value)
-  #     puts "get_start_value"
-  #     start_value.each do |start|
-  #       puts start
-  #       stock = Stock.new
-  #       stock.start_value = start
-  #       stock.save
-  #     end
-  # end

@@ -4,9 +4,22 @@ class TopController < ApplicationController
   	# @stocks = Stock.order('dates ASC').group(:dates).count
    #  @stocks = Stock.order('dates ASC').group(:dates).sum(:end_value)
 
-    @stocks = Stock.order('id DESC')
+    i = Kagi.all.length
+    num = (Kagi.find(i).index) * 2 - 2
+    @kagis = Kagi.limit(num)
     @datas = []
     
+    @kagis.each do |kagi|
+      data = []
+      data << kagi.x
+      data << kagi.kagi_ashi
+      @datas << data
+    end
+    @datas_j = @datas.to_json.html_safe
+  end
+
+  def index2
+
     @stocks.each do |stock|
       data = []
       data << stock.dates.to_s
