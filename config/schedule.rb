@@ -6,8 +6,8 @@ set :environmet, :development
 #   runner "Scraping.stock_score"
 # end
 
-every 1.minute do
-  runner "Scraping.stock_score"
+every 1.hours do
+  rake "sync:stock_score"
 end
 
 # Use this file to easily define all of your cron jobs.

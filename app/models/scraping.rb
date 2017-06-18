@@ -1,7 +1,7 @@
 class Scraping
   def self.stock_score
     agent = Mechanize.new
-    page = agent.get("http://k-db.com/indices/I101")
+    page = agent.get("http://k-db.com/futures/F101-0000/4h/2017")
     elements = page.search('#maintable td')
 
     test = []
@@ -23,7 +23,7 @@ class Scraping
     # 日付スクレイピング
     dates = []
     test.each do |date|
-      if date[:id] % 7 == 1
+      if date[:id] % 9 == 1
       	dates << date[:data]
       end
     end
@@ -42,7 +42,7 @@ class Scraping
     # 始値スクレイピング
     start_value = []
     test.each do |start|
-      if start[:id] % 7 == 3
+      if start[:id] % 9 == 3
         start_value << start[:data]
       end
     end
@@ -67,7 +67,7 @@ class Scraping
     # 高値スクレイピング
     high_value = []
     test.each do |high|
-      if high[:id] % 7 == 4
+      if high[:id] % 9 == 4
         high_value << high[:data]
       end
     end
@@ -84,7 +84,7 @@ class Scraping
     # 安値スクレイピング
     low_value = []
     test.each do |low|
-      if low[:id] % 7 == 5
+      if low[:id] % 9 == 5
         low_value << low[:data]
       end
     end
@@ -101,7 +101,7 @@ class Scraping
     # 終値スクレイピング
     end_value = []
     test.each do |finish|
-      if finish[:id] % 7 == 6
+      if finish[:id] % 9 == 6
         end_value << finish[:data]
       end
     end
@@ -115,6 +115,22 @@ class Scraping
       j = j + 1
     end
 
+    # 時間スクレイピング
+    times = []
+    test.each do |time|
+      if time[:id] % 9 == 2
+        times << time[:data]
+      end
+    end
+
+    # 終値保存
+    j = 0
+    times.reverse!
+    times.each do |time|
+      stock[j][:times] = time
+      stock[j].save
+      j = j + 1
+    end
 
     # j = 0
     # high_value.zip(low_value).each do|highlow|

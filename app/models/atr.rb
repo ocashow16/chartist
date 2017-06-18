@@ -4,7 +4,7 @@ class Atr < ActiveRecord::Base
     while i <= Stock.all.length do
       now_stock = Stock.find(i)
       before_stock = Stock.find(i-1)
-      atr = Atr.where(dates: now_stock.dates).first_or_initialize
+      atr = Atr.where(dates: now_stock.dates,times: now_stock.times).first_or_initialize
       atr.high_value_minus_before_end_value = (now_stock.high_value) - (before_stock.end_value)
       atr.before_end_value_minus_low_value = (before_stock.end_value) - (now_stock.low_value)
       atr.high_value_minus__low_value = (now_stock.high_value) - (now_stock.low_value)

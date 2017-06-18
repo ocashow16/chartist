@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170617055354) do
+ActiveRecord::Schema.define(version: 20170618125433) do
 
   create_table "atrs", force: :cascade do |t|
     t.float    "high_value_minus_before_end_value", limit: 24
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20170617055354) do
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
     t.datetime "dates"
+    t.time     "times"
   end
 
   create_table "kagis", force: :cascade do |t|
@@ -35,6 +36,17 @@ ActiveRecord::Schema.define(version: 20170617055354) do
     t.datetime "updated_at",            null: false
   end
 
+  create_table "reals", force: :cascade do |t|
+    t.datetime "dates"
+    t.time     "times"
+    t.float    "start_value", limit: 24
+    t.float    "high_value",  limit: 24
+    t.float    "low_value",   limit: 24
+    t.float    "end_value",   limit: 24
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "stocks", force: :cascade do |t|
     t.float    "start_value", limit: 24
     t.float    "high_value",  limit: 24
@@ -43,6 +55,7 @@ ActiveRecord::Schema.define(version: 20170617055354) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.datetime "dates"
+    t.time     "times"
   end
 
 end

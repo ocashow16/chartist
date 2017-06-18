@@ -9,7 +9,7 @@
       function drawLineColors() {
         var data = new google.visualization.DataTable();
         data.addColumn('number', 'X');
-        data.addColumn('number', '日経平均日足カギ足');
+        data.addColumn('number', '日経平均先物4時間足カギ足');
         // data.addColumn('number', 'Cats');
 
         data.addRows(<%= @datas_j %>);
@@ -19,7 +19,7 @@
             title: 'Chartist'
           },
           vAxis: {
-            title: '日経平均日足株価(円)'
+            title: '日経平均先物4時間足(円)'
           },
           colors: ['#a52714', '#097138']
         };
@@ -27,9 +27,15 @@
         var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
+
     </script>
   </head>
   <body>
     <div id="chart_div" style="width: 900px; height: 500px"></div>
   </body>
+  <head>
+  <a class="twitter-timeline" href="https://twitter.com/ocashow/lists/list">A Twitter List by ocashow</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </head>
 </html>
+
+
