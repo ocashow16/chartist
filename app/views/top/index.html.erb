@@ -9,17 +9,17 @@
       function drawLineColors() {
         var data = new google.visualization.DataTable();
         data.addColumn('number', 'X');
-        data.addColumn('number', 'Dogs');
+        data.addColumn('number', '日経平均日足カギ足');
         // data.addColumn('number', 'Cats');
 
         data.addRows(<%= @datas_j %>);
 
         var options = {
           hAxis: {
-            title: 'Time'
+            title: 'Chartist'
           },
           vAxis: {
-            title: 'Popularity'
+            title: '日経平均日足株価(円)'
           },
           colors: ['#a52714', '#097138']
         };
